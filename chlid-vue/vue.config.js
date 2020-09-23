@@ -1,4 +1,5 @@
 module.exports = {
+    publicPath: 'http://localhost:9999/',
     devServer: {
         port: 9999,
         headers:{
@@ -6,15 +7,17 @@ module.exports = {
             "Access-Control-Allow-Origin":"*"
         }
     },
+    css: {
+        extract: false
+    },
     configureWebpack: {
         devtool: 'none', // 不打包sourcemap
         output: {
             library: "qiankunVue", // 导出名称
-            libraryTarget: "window", //把子应用打包成 umd 库格式
+            libraryTarget: "umd", //把子应用打包成 umd 库格式
         }
-    },
-    // cssModules: {
-    //     localIdentName: '[path][name]---[local]---[hash:base64:5]',
-    //     camelCase: true
-    //   }
+    }, 
+    chainWebpack: config => {
+        config.optimization.delete('splitChunks')
+    }
 }

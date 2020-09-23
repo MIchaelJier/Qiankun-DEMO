@@ -11,24 +11,20 @@
         <div id="lcps"></div>
     </div>
 </template>
-
+<style>
+    @import './styles/init.scss'
+</style>
 <style lang="scss" scoped>
-body{
-      width: 100%;
-      height: 100vh;
-      overflow: hidden;
-      padding: 0;
-      margin: 0; 
-    }
 #main-app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
+    font-size: 14px;
 }
 
-.nav {
+#main-app .nav {
     padding: 30px;
     position: fixed;
     writing-mode: tb-rl;

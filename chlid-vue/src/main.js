@@ -1,20 +1,26 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
+import HelloWorld from './components/HelloWorld.vue'
 
 Vue.config.productionTip = false
 
 // 方便控制当子应用从父应用卸载时用
 let instance = null;
-
   function render (props = {}) {
     const { container } = props;
-    console.log(props)
     instance = new Vue({
       router,
       render: h => h(App)
     }).$mount(container ? container.querySelector('#app') : '#app')
   } 
+
+// 通用组件
+export const createHelloWorld = (container, props) => {
+  return new Vue({
+    render: h => h(HelloWorld, {attrs: props}),
+  }).$mount(container);
+}
 
 if (window.__POWERED_BY_QIANKUN__) {
     __webpack_public_path__ = window.__INJECTED_PUBLIC_PATH_BY_QIANKUN__;

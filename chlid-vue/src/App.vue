@@ -14,13 +14,6 @@ export default {
 </script>
 
 <style lang="scss">
-body{
-      width: 100%;
-      height: 100vh;
-      overflow: hidden;
-      padding: 0;
-      margin: 0; 
-    }
 #app_chlid {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

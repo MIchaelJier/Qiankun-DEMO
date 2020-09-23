@@ -5,6 +5,9 @@ import { registerMicroApps, setDefaultMountApp, start } from "qiankun"
 
 let app = null;
 
+let token = ''
+setTimeout(() => {token = 'get123123123123'}, 1000)
+
 registerMicroApps(
     [
         {
@@ -18,7 +21,8 @@ registerMicroApps(
             activeRule: '/vue',
             // 传参 子应用可以接受
             props: {
-                data: '我是父应用传的数据'
+                data: '我是父应用传的数据',
+                token
             }
         },
         {
@@ -33,7 +37,8 @@ registerMicroApps(
             base: '/lcps',
             // 传参 子应用可以接受
             props: {
-                data: '我是父应用传的数据'
+                data: '我是父应用传的数据',
+                token
             }
         },
     ]
