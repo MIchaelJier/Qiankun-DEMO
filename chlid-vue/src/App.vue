@@ -1,6 +1,7 @@
 <template>
   <div id="app_chlid">
     <div class="nav">
+      {{ user.name }}
       <router-link to="/" >Home</router-link> |
       <router-link to="/about" >About</router-link>
     </div>
@@ -9,7 +10,17 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
+  data() {
+    return {
+    }
+  },
+  computed: {
+    ...mapState('global', {
+      user: state => state.user, // 获取父应用的user信息
+    }),
+  }
 }
 </script>
 

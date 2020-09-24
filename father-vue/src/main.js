@@ -1,48 +1,13 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
+import microApps from './micro-app'
+
 import { registerMicroApps, setDefaultMountApp, start } from "qiankun"
 
 let app = null;
 
-let token = ''
-setTimeout(() => {token = 'get123123123123'}, 1000)
-
-registerMicroApps(
-    [
-        {
-            // 应用名称
-            name: 'qiankunVue',
-            // 加载的js
-            entry: '//localhost:9999',
-            // 挂载到哪里
-            container: '#qiankunVue',
-            // 路径
-            activeRule: '/vue',
-            // 传参 子应用可以接受
-            props: {
-                data: '我是父应用传的数据',
-                token
-            }
-        },
-        {
-            // 应用名称
-            name: 'lcps',
-            // 加载的js
-            entry: '//localhost:8090/lcps/',  
-            // 挂载到哪里
-            container: '#lcps',
-            // 路径
-            activeRule: '/lcps',
-            base: '/lcps',
-            // 传参 子应用可以接受
-            props: {
-                data: '我是父应用传的数据',
-                token
-            }
-        },
-    ]
-)
+registerMicroApps(microApps)
 
 render({ loading: true });
 // 设置默认子应用

@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
+import store from './store'
+import globalRegister from './utils/global-register'
 import HelloWorld from './components/HelloWorld.vue'
 
 Vue.config.productionTip = false
@@ -11,6 +13,7 @@ let instance = null;
     const { container } = props;
     instance = new Vue({
       router,
+      store,
       render: h => h(App)
     }).$mount(container ? container.querySelector('#app') : '#app')
   } 
@@ -34,10 +37,11 @@ if (!window.__POWERED_BY_QIANKUN__) {
 export async function bootstrap (props) {
     // 可以接收从父应用传过来的参数
     console.log(props)
-}
+} 
 
 export async function mount (props) {
     console.log(props)
+    globalRegister(store, props)
     render(props); 
 }
 
