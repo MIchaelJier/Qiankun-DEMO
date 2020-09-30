@@ -1,9 +1,10 @@
 <template>
   <div id="app_chlid">
     <div class="nav">
-      {{ user.name }}
+      <h4>主应用用户：{{ user.name }}</h4>
       <router-link to="/" >Home</router-link> |
       <router-link to="/about" >About</router-link>
+      <h1 @click="gotoLcps" style="cursor: pointer;color: red" >go to lcps</h1>
     </div>
     <router-view/>
   </div>
@@ -20,7 +21,12 @@ export default {
     ...mapState('global', {
       user: state => state.user, // 获取父应用的user信息
     }),
-  }
+  },
+  methods: {
+     gotoLcps () {
+      history.pushState(null, 'lcps', '/lcps/')
+    }
+  },
 }
 </script>
 

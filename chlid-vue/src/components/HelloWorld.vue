@@ -4,6 +4,7 @@
     <p>
       这是一个跨项目组件栗子
     </p> 
+    <br/>
   </div>
 </template>
  
@@ -13,7 +14,6 @@ export default {
   props: {
     msg: String
   },
-  
 }
 </script>
 

@@ -1,4 +1,5 @@
 import store from './store'
+import {loader} from './main'
 
 const microApps = [
   {
@@ -27,10 +28,11 @@ const microApps = [
 const apps = microApps.map(item => {
   return {
     ...item,
+    loader,
     props: {
       routerBase: item.activeRule,
-      getGlobalState: store.getGlobalState 
-    }
+      getGlobalState: store.getGlobalState,
+    },
   }
 })
 

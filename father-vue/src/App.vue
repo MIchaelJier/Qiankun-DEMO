@@ -4,16 +4,77 @@
             <router-link to="/">Home</router-link> |
             <router-link to="/about">主应用的About</router-link>|
             <router-link to="/vue">Vue</router-link>|
-            <router-link to="/lcps">lcps</router-link>
+            <router-link to="/lcps/lps">lcps</router-link>
         </div>
         <router-view />
         <div id="qiankunVue"></div>
         <div id="lcps"></div>
     </div>
 </template>
-<style>
-    @import './styles/init.scss'
-</style>
+
+<script>
+import NProgress from 'nprogress'
+export default {
+ data() { 
+     return {
+         isLoading: true
+     }
+ },
+ created() {
+    NProgress.start()
+ },
+ mounted() { 
+     // console.log(this.$parent.loading)
+ },
+ methods: {
+    goto (item) {
+      history.pushState(null, item.activeRule, item.activeRule)
+      // this.current = item.name
+    },
+    bindCurrent () {
+      const path = window.location.pathname
+      if (this.microApps.findIndex(item => item.activeRule === path) >= 0) {
+        this.current = path
+      }
+    },
+    listenRouterChange () {
+      const _wr = function (type) {
+        const orig = history[type]
+        return function () {
+          const rv = orig.apply(this, arguments)
+          const e = new Event(type)
+          e.arguments = arguments
+          window.dispatchEvent(e)
+          return rv
+        }
+      }
+      history.pushState = _wr('pushState')
+      window.addEventListener('pushState', this.bindCurrent)
+      window.addEventListener('popstate', this.bindCurrent)
+      this.$once('hook:beforeDestroy', () => {
+        window.removeEventListener('pushState', this.bindCurrent)
+        window.removeEventListener('popstate', this.bindCurrent)
+      })
+    }
+ },
+ watch: {
+    //  '$parent.loading'(newVal){
+    //      console.log(newVal)
+    //      this.loading = newVal
+    //  }
+    isLoading (val) {
+      if (val) {
+        NProgress.start()
+      } else {
+        this.$nextTick(() => {
+          NProgress.done()
+        })
+      }
+    }
+ },
+}
+</script>
+
 <style lang="scss" scoped>
 #main-app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -40,4 +101,19 @@
         }
     }
 }
+
+#main-app {
+  flex-grow: 1;
+  position: relative;
+
+  .subapp-loading {
+    color: #444;
+    font-size: 28px;
+    font-weight: 600;
+    text-align: center;
+  }
+}
+</style>
+<style>
+    @import './styles/init.scss'
 </style>
