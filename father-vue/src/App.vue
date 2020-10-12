@@ -92,6 +92,7 @@ export default {
     background: #222;
     height: 100%;
     z-index: 111;
+    box-sizing: border-box;
     a {
         font-weight: bold;
         color: #ffffff;
